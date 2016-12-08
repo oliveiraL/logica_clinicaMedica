@@ -23,11 +23,11 @@ public class DoctorEstetica extends Especialista{
     
    /*@ also
      @ public normal_behavior
-     @ requires (getCrm() != null && getCrm() != "" && getTempoProfissao() > 0) || (getNome() != null && getNome() != "" && getCPF() != null && getCPF() != "" && getEspecialidade() != null); 
+     @ requires (getCrm() != null && !getCrm().equals("") && getTempoProfissao() > 0) || (getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null); 
      @ assignable \nothing;
      @ also
      @ public exceptional_behavior
-     @ requires (getCrm() == null || getCrm() == "" || getTempoProfissao() <= 0) || (getNome() == null || getNome() == "" || getCPF() == null || getCPF() == "" || getEspecialidade() == null);
+     @ requires (getCrm() == null || getCrm().equals("") || getTempoProfissao() <= 0) || (getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null);
      @ assignable \nothing;
      @ signals_only ValidacaoException;
      @*/

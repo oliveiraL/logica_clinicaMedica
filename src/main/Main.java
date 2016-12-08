@@ -13,9 +13,9 @@ import validacoes.ValidacaoException;
 public class Main {
 
 	public static void main(String[] args) {
-		Especialidade especialidade = new Especialidade("descricao","designacao");
-		DoctorEstetica doctor = new DoctorEstetica("crm", especialidade, "nome", "CPF", 15);
-		TipoAtendimento tipoAtendimento = new TipoAtendimento("descricao");
+		Especialidade especialidade = new Especialidade("descricao", "designacao");
+		DoctorEstetica doctor = new DoctorEstetica("crm", especialidade, "teste", "CPF", 15);
+		TipoAtendimento tipoAtendimento = new TipoAtendimento("Tipo de Atendimento");
 		try {
 			especialidade.validarEspecialidade();
 			doctor.validarEspecialista();

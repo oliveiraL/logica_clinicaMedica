@@ -25,11 +25,11 @@ public abstract class Especialista {
     }
     
     /*@ public normal_behavior
-    @ requires getNome() != null && getNome() != "" && getCPF() != null && getCPF() != "" && getEspecialidade() != null; 
+    @ requires getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null; 
     @ assignable \nothing;
     @ also
     @ public exceptional_behavior
-    @ requires getNome() == null || getNome() == "" || getCPF() == null || getCPF() == "" || getEspecialidade() == null;
+    @ requires getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null;
     @ assignable \nothing;
     @ signals_only ValidacaoException;
     @*/

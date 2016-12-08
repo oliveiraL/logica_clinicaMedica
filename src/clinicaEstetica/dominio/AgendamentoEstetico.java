@@ -18,7 +18,9 @@ import validacoes.ValidacaoException;
  * @author victor
  */
 public class AgendamentoEstetico extends AgendamentoAtendimento {
-
+	
+  /*@ ensures this.dataHora == dataHora && this.especialista == especialista && this.paciente == paciente && this.especialidade == especialidade;
+    @*/
     public AgendamentoEstetico(Date dataHora, Especialista especialista, Paciente paciente, Especialidade especialidade) {
         super(dataHora, especialista, paciente, especialidade);
     }
