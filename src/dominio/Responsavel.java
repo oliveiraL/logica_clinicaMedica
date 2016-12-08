@@ -2,16 +2,16 @@ package dominio;
 
 public class Responsavel {
 
-    private /* @ spec_public @*/int id;
+    private /*@ spec_public nullable @*/int id;
 
-    private /* @ spec_public @*/String nome;
+    private /*@ spec_public nullable @*/String nome;
 
-    private /* @ spec_public @*/ String CPF;
+    private /*@ spec_public nullable @*/ String CPF;
 
     public Responsavel() {
     }
 
-    public Responsavel(String nome, String CPF) {
+    public Responsavel(/*@ nullable @*/String nome,/*@ nullable @*/ String CPF) {
         this.nome = nome;
         this.CPF = CPF;
     }
@@ -26,7 +26,7 @@ public class Responsavel {
         this.id = id;
     }
 
-    public /* @ pure @*/ String getNome() {
+    public /*@ pure @*/ String getNome() {
         return nome;
     }
 
@@ -34,7 +34,7 @@ public class Responsavel {
         this.nome = nome;
     }
 
-    public /* @ pure @*/ String getCPF() {
+    public /*@ pure @*/ String getCPF() {
         return CPF;
     }
 

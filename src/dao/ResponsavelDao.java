@@ -1,6 +1,6 @@
 package dao;
 
-public class ResponsavelDao extends GenericDao {
+public class ResponsavelDao  {
 
 //    private GenericDao genericDao;
 }

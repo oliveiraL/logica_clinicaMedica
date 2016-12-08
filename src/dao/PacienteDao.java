@@ -1,8 +1,9 @@
 package dao;
 
 import dominio.Paciente;
+import validacoes.ValidacaoException;
 
-public class PacienteDao extends GenericDao {
+public class PacienteDao extends GenericDao<Paciente> {
 
 //    public PacienteDao(String pacote) {
 //        super(System.getProperty("user.dir") + "/src/"+pacote+"/paciente.xml");
@@ -12,13 +13,16 @@ public class PacienteDao extends GenericDao {
 //        return false;
 //    }
 //
-//    public void salvar(Paciente paciente) {
-//        System.err.println(listagem.size() + 1);
-//        paciente.setId(listagem.size() + 1);
-//        listagem.add(paciente);
-//        super.salvar();
-//        System.err.println(listagem.size());
-//    }
+	
+	/*@ also
+	  @ assignable obj;
+	  @ ensures obj.getId() == this.listagem.size();
+	  */
+	@Override
+	public void salvar(Paciente obj) {
+		super.salvar(obj);
+		obj.setId(listagem.size());
+	}
 //
 //    public void atualizar(Paciente paciente) {
 //        int i = 0;

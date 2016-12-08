@@ -27,26 +27,18 @@ public class PacienteEstetica extends Paciente {
     }
 
     /*@ also
-      @ 	public normal_behavior
-      @ 	requires this.CPF != null;
-      @ 	requires this.CPF != "";
-      @ 	requires (this.idade < 18) ==> (this.responsavel != null);
-      @ 	assignable \nothing;
-      @ 	ensures this.CPF == \old(this.CPF);
-      @ 	ensures this.idade == \old(this.idade);
-      @ 	ensures this.responsavel == \old( this.responsavel );
-      @ also
-      @ 	public exceptional_behavior
-      @ 	requires this.CPF == null || this.CPF == "" || ((this.idade < 18) ==> (this.responsavel == null));
-      @ 	signals_only ValidacaoException;
+      @ 	ensures (this.CPF != null && this.CPF != "" && (this.idade < 18) && (this.responsavel != null)) ==> (\result == true);
+      @ 	ensures (this.CPF == null || this.CPF == "" || ((this.idade < 18) && (this.responsavel == null))) ==> (\result == false);
       */
     @Override
-    public void validarPaciente() throws ValidacaoException {
-    	super.validarPaciente();
-        if (getCPF() == null || getCPF().trim().isEmpty()) 
-            throw new ValidacaoException("CPF Paciente invalido.");
-        if (getIdade() < 18 && (getResponsavel() == null)) 
-            throw new ValidacaoException("Paciente Menor de idade, Precisa de Responsavel.");
+    public /*@ pure @*/ boolean validarPaciente(){
+    	if(!super.validarPaciente())
+    		return false;
+    	if (CPF == null || CPF.trim().isEmpty()) 
+    		return false;
+        if (idade < 18 && (responsavel == null)) 
+        	return false;
+        return true;
         
     }
 

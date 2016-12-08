@@ -24,8 +24,7 @@ public class Especialidade {
     public Especialidade() {
     }
     
-  /*@ also 
-    @ public normal_behavior
+  /*@ public normal_behavior
     @ requires getDescricao() != null; 
     @ assignable \nothing;
     @ ensures getDescricao() == \old(getDescricao());
