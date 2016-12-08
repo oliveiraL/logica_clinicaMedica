@@ -8,22 +8,22 @@ import validacoes.ValidacaoException;
 
 public class GerenciarPacienteController {
 //
-    private/*@ spec_public non_null @*/ PacienteDao pacienteDao;
+//    private/*@ spec_public non_null @*/ PacienteDao pacienteDao;
 //    GerenciarProntuarioController gerenciarProntuario;
 //
-    public GerenciarPacienteController() {
-        pacienteDao = new PacienteDao();
+//    public GerenciarPacienteController() {
+//        pacienteDao = new PacienteDao();
 //        gerenciarProntuario = new GerenciarProntuarioController(pacote);
-    }
+//    }
 
     
-    public void cadastrarPaciente(Paciente paciente) throws ValidacaoException {
+//    public void cadastrarPaciente(Paciente paciente) throws ValidacaoException {
 //    	if(paciente == null)
 //    		throw new ValidacaoException("Preencha os dados do paciente corretamente.");
-    	pacienteDao.salvar(paciente);
-    	paciente.validarPaciente();
-        
-    }
+//    	pacienteDao.salvar(paciente);
+//    	paciente.validarPaciente();
+//        
+//    }
 //
 //    public void removerPaciene(Paciente paciente) {
 //        pacienteDao.remover(paciente);

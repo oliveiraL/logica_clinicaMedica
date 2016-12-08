@@ -10,36 +10,44 @@ public class DoctorEstetica extends Especialista{
     
 	private /*@ spec_public nullable @*/ int tempoProfissao;
 	
-  /*@ 
-    @ requires crm != null;
-    @ requires especialidade != null;
-    @ requires nome != null;
-    @ requires CPF != null;
+  /*@ ensures this.crm ==crm && this.especialidade == especialidade && this.nome == nome && this.CPF == CPF && this.tempoProfissao == tempoProfissao;
     @*/
-    public DoctorEstetica(String crm, Especialidade especialidade, String nome, String CPF){
+    public DoctorEstetica(String crm, Especialidade especialidade, String nome, String CPF, int tempoProfissao){
        super(especialidade, nome, CPF);
        this.crm = crm;
+       this.tempoProfissao = tempoProfissao;
     }
      
      public DoctorEstetica() {
      }
     
-   /*@ also 
+   /*@ also
      @ public normal_behavior
-     @ requires getCrm() != null && getCPF() != null && !getCPF().isEmpty() && getCrm().isEmpty(); 
+     @ requires (getCrm() != null && getCrm() != "" && getTempoProfissao() > 0) || (getNome() != null && getNome() != "" && getCPF() != null && getCPF() != "" && getEspecialidade() != null); 
      @ assignable \nothing;
-     @ ensures getCrm() == \old(getCrm()) && getCPF() == \old(getCPF());
+     @ also
+     @ public exceptional_behavior
+     @ requires (getCrm() == null || getCrm() == "" || getTempoProfissao() <= 0) || (getNome() == null || getNome() == "" || getCPF() == null || getCPF() == "" || getEspecialidade() == null);
+     @ assignable \nothing;
+     @ signals_only ValidacaoException;
      @*/
+     @Override
     public void validarEspecialista() throws ValidacaoException {
-        if(getCrm() == null || getCPF() == null || getCPF().isEmpty() || getCrm().isEmpty()){
-            throw new ValidacaoException("Erro ao validar Especialista.");
+       super.validarEspecialista();
+    	if(getCrm() == null || getCrm().trim().isEmpty()){
+            throw new ValidacaoException("Crm do Doctor obrigatorio.");
+        }
+    	
+    	if(getTempoProfissao() <= 0){
+            throw new ValidacaoException("Tempo de Profissao inválido.");
         }
     }
     
-    public /*@ pure @*/ String getCrm() {
+    public /*@ pure nullable @*/ String getCrm() {
         return crm;
     }
-
+    
+    //@ ensures this.crm == crmv;
     public void setCrm(String crmv) {
         this.crm = crmv;
     }
@@ -49,7 +57,7 @@ public class DoctorEstetica extends Especialista{
 		return tempoProfissao;
 	}
 
-
+	//@ ensures this.tempoProfissao == tempoProfissao;
 	public void setTempoProfissao(int tempoProfissao) {
 		this.tempoProfissao = tempoProfissao;
 	}

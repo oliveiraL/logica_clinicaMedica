@@ -7,22 +7,24 @@ import clinicaEstetica.dominio.PacienteEstetica;
 import controller.GerenciarPacienteController;
 import dao.PacienteDao;
 import dominio.Paciente;
+import dominio.TipoAtendimento;
 import validacoes.ValidacaoException;
 
 public class Main {
 
 	public static void main(String[] args) {
-		GerenciarPacienteController controller = new GerenciarPacienteController();
-		PacienteDao dao = new PacienteDao();
-		// TODO Auto-generated method stub
-		PacienteEstetica p = new PacienteEstetica();
+		Especialidade especialidade = new Especialidade("descricao","designacao");
+		DoctorEstetica doctor = new DoctorEstetica("crm", especialidade, "nome", "CPF", 15);
+		TipoAtendimento tipoAtendimento = new TipoAtendimento("descricao");
 		try {
-			dao.salvar(p);
-			controller.cadastrarPaciente(p);
+			especialidade.validarEspecialidade();
+			doctor.validarEspecialista();
+			tipoAtendimento.validarTipoAtendimento();
 		} catch (ValidacaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 
 }

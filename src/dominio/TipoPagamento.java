@@ -10,11 +10,15 @@ package dominio;
  * @author lucio
  */
 public abstract class TipoPagamento {
+	
     private /*@ spec_public @*/ String descricao;
+    
     public abstract void operacaoPagamento(Double valor);
-	public /* @ pure @  */ String getDescricao() {
+    
+	public /*@ pure @*/ String getDescricao() {
 		return descricao;
 	}
+	
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
