@@ -7,14 +7,15 @@ import validacoes.ValidacaoException;
 
 public class GerenciarPacienteController {
 //
-    private/*@ spec_public non_null @*/ PacienteDao pacienteDao;
+//    private/*@ spec_public non_null @*/ PacienteDao pacienteDao;
 //    GerenciarProntuarioController gerenciarProntuario;
 //
-    public GerenciarPacienteController() {
-        pacienteDao = new PacienteDao();
+//    public GerenciarPacienteController() {
+//        pacienteDao = new PacienteDao();
 //        gerenciarProntuario = new GerenciarProntuarioController(pacote);
-    }
+//    }
 
+<<<<<<< HEAD
     /*@ public normal_behavior 
       @		requires paciente != null;
       @		requires paciente.validarPaciente();
@@ -43,6 +44,31 @@ public class GerenciarPacienteController {
 	    return (Paciente) pacienteDao.buscarId(id);
     }
 
+=======
+    
+//    public void cadastrarPaciente(Paciente paciente) throws ValidacaoException {
+//    	if(paciente == null)
+//    		throw new ValidacaoException("Preencha os dados do paciente corretamente.");
+//    	pacienteDao.salvar(paciente);
+//    	paciente.validarPaciente();
+//        
+//    }
+//
+//    public void removerPaciene(Paciente paciente) {
+//        pacienteDao.remover(paciente);
+//    }
+//
+//    public Paciente buscarPaciente(int id) throws ValidacaoException {
+//        ArrayList<Paciente> pacientes = pacienteDao.listar();
+//        for (Paciente p : pacientes) {
+//            if (p.getId() == id) {
+//                return p;
+//            }
+//        }
+//        throw new ValidacaoException("Paciente não cadastrado.");
+//    }
+//
+>>>>>>> 07cc0e6cb3763bd4816cb87f7918bda6e9d47f5a
 //    public Paciente buscarPaciente(String cpfResponsalvel) throws ValidacaoException {
 //        ArrayList<Paciente> pacientes = pacienteDao.listar();
 //        for (Paciente p : pacientes) {

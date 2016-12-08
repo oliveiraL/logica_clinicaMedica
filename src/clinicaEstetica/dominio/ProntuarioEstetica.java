@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Monster
  */
 public class ProntuarioEstetica extends Prontuario{
-    private /*@ spec_public @*/ Date dataCriacao;
+    private /*@ spec_public nullable @*/ Date dataCriacao;
    
     
     /*@ requires date != null;
@@ -25,11 +25,11 @@ public class ProntuarioEstetica extends Prontuario{
     	this.dataCriacao = date;
     }
     
-    
-     public /* @ pure @ */ Date getDataCriacao() {
+     public /*@ pure nullable @*/ Date getDataCriacao() {
         return dataCriacao;
     }
-
+     
+   //@ ensures this.dataCriacao == dataCriacao;
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }

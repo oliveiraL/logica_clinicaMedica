@@ -74,7 +74,6 @@ public abstract class GenericDao<T extends Entidade> {
 		}
 		throw new ValidacaoException("Não existe obj.");
 	}
-    
 	//@ ensures \result == (\exists int i; 0 <= i && i < this.listagem.size(); this.listagem.get(i).equals(obj));
 	public boolean existe(T obj){
 		return listagem.contains(obj);

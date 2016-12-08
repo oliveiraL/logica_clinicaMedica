@@ -10,51 +10,65 @@ public class Especialidade {
     
     private /*@ spec_public nullable @*/ String designacao;
     
-  /*@ 
-    @ requires descricao != null;
-    @ requires designacao != null;
+  /*@ ensures this.descricao == descricao && this.designacao == designacao;
     @*/
     public Especialidade(String descricao, String designacao) {
         this.descricao = descricao;
         this.designacao = designacao;
     }
 
-   
-    
     public Especialidade() {
     }
     
   /*@ public normal_behavior
+<<<<<<< HEAD
     @ requires getDescricao() != null; 
+=======
+    @ requires getDescricao() != null && getDescricao() != "" && getDesignacao() != null && getDesignacao() != ""; 
     @ assignable \nothing;
-    @ ensures getDescricao() == \old(getDescricao());
+    @ ensures getDescricao() == \old(getDescricao()) && getDesignacao() == \old(getDesignacao());
+    @ also
+    @ public exceptional_behavior
+    @ requires getDescricao() == null || getDescricao() == "" || getDesignacao() == null || getDesignacao() == "";
+>>>>>>> 07cc0e6cb3763bd4816cb87f7918bda6e9d47f5a
+    @ assignable \nothing;
+    @ signals_only ValidacaoException;
     @*/
    public void validarEspecialidade() throws ValidacaoException {
-       if(getDescricao() == null){
-           throw new ValidacaoException("Erro ao validar Especialista.");
+	   
+       if(getDescricao() == null || getDescricao().trim().isEmpty()){
+           throw new ValidacaoException("Descricao obrigatoria.");
        }
+       
+       if(getDesignacao() == null || getDesignacao().trim().isEmpty()){
+           throw new ValidacaoException("Designicao obrigatoria.");
+       }
+          
    }
 
     public /*@ pure @*/ int getId() {
         return id;
     }
-
+    
+    //@ ensures this.id == id;
     public void setId(int id) {
         this.id = id;
     }
 
-    public /*@ pure @*/ String getDescricao() {
+    public /*@ pure nullable @*/ String getDescricao() {
         return descricao;
     }
-
+    
+    //@ ensures this.descricao == descricao;
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public /*@ pure @*/ String getDesignacao() {
+    public /*@ pure nullable @*/ String getDesignacao() {
         return designacao;
     }
-
+    
+    //@ ensures this.designacao == designacao;
     public void setDesignacao(String designacao) {
         this.designacao = designacao;
     }
