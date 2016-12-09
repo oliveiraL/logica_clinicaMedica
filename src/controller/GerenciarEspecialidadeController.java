@@ -28,7 +28,7 @@ public class GerenciarEspecialidadeController {
       @ 	requires especialidade != null;
       @		requires especialidade.validarEspecialidade();
       @ 	assignable especialidade;
-      @ 	ensures especialidade.getId() == this.listarPacientes().size();
+      @ 	ensures especialidade.getId() == this.listagem().size();
       @ also
 	  @ public exceptional_behavior
 	  @ 	requires especialidade == null || !especialidade.validarEspecialidade();
@@ -49,7 +49,8 @@ public class GerenciarEspecialidadeController {
     @ ensures especialidade == \old(especialidade);
     @ also
     @ public exceptional_behavior
-    @ requires especialidade == null || !this.verificarExistencia(especialidade) || especialidade.getId()== 0;
+    @ requires (especialidade == null || !this.verificarExistencia(especialidade) || especialidade.getId() == 0);
+	@ assignable \nothing;
     @ signals_only ValidacaoException;
     @*/
     public void remover(Especialidade especialidade) throws ValidacaoException{
@@ -57,8 +58,12 @@ public class GerenciarEspecialidadeController {
     		throw new ValidacaoException("Especialidade Vazia");
     	especialidadeDao.remover(especialidade);
     }
-	    
-    public List<Especialidade> listagem(){
+	
+    public Especialidade buscarPaciente(int id) throws ValidacaoException {
+	    return (Especialidade) especialidadeDao.buscarId(id);
+    }
+    
+    public/*@ pure @*/ List<Especialidade> listagem(){
         return especialidadeDao.getListagem();
     }
     

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import dominio.Entidade;
 import validacoes.ValidacaoException;
-public abstract class GenericDao<T extends Entidade> {
+public class GenericDao<T extends Entidade> {
 
     protected/*@ spec_public non_null @*/ ArrayList<T> listagem;
 

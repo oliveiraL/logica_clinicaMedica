@@ -59,6 +59,6 @@ public class DoctorEstetica extends Especialista{
 	public void setTempoProfissao(int tempoProfissao) {
 		this.tempoProfissao = tempoProfissao;
 	}
-    
+
     
 }

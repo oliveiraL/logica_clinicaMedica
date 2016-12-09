@@ -3,15 +3,12 @@ package dominio;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Prontuario {
+public class Prontuario extends Entidade {
 
-    private /*@ spec_public @*/ int id;
+    private /*@ spec_public non_null @*/ ArrayList<Atendimento> atendimento;
 
-    private /*@ spec_public @*/ ArrayList<Atendimento> atendimento;
+    private /*@ spec_public nullable @*/ Paciente paciente;
 
-    private /*@ spec_public @*/ Paciente paciente;
-
-    
     public Prontuario() {
         atendimento = new ArrayList<Atendimento>();
     }
@@ -25,14 +22,6 @@ public abstract class Prontuario {
      */
     public void addAtendimento(Atendimento atendimento){
     	this.atendimento.add(atendimento);
-    }
-
-    public /* @ pure @*/ int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public /* @ pure @*/ ArrayList<Atendimento> getAtendimento() {
