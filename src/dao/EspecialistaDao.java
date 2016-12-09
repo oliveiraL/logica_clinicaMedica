@@ -5,7 +5,7 @@ import dominio.Especialista;
 
 
 
-public class EspecialistaDao extends GenericDao{
+public class EspecialistaDao extends GenericDao<Especialista>{
 
 
 //    public EspecialistaDao(String pacote) {

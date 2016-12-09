@@ -22,25 +22,23 @@ public class DoctorEstetica extends Especialista{
      }
     
    /*@ also
-     @ public normal_behavior
-     @ requires (getCrm() != null && !getCrm().equals("") && getTempoProfissao() > 0) || (getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null); 
+     
      @ assignable \nothing;
-     @ also
-     @ public exceptional_behavior
-     @ requires (getCrm() == null || getCrm().equals("") || getTempoProfissao() <= 0) || (getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null);
-     @ assignable \nothing;
-     @ signals_only ValidacaoException;
+     @ ensures (getCrm() != null && !getCrm().equals("") && getTempoProfissao() > 0) || (getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null) ==> \result == true; 
+     @ ensures (getCrm() == null || getCrm().equals("") || getTempoProfissao() <= 0) || (getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null) ==> \result == false;
      @*/
      @Override
-    public void validarEspecialista() throws ValidacaoException {
-       super.validarEspecialista();
+    public boolean validarEspecialista() {
+       if(!super.validarEspecialista())
+    	   return false;
     	if(getCrm() == null || getCrm().trim().isEmpty()){
-            throw new ValidacaoException("Crm do Doctor obrigatorio.");
+            return false;
         }
     	
     	if(getTempoProfissao() <= 0){
-            throw new ValidacaoException("Tempo de Profissao inválido.");
+    		return false;
         }
+    	return true;
     }
     
     public /*@ pure nullable @*/ String getCrm() {

@@ -13,6 +13,13 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		DoctorEstetica doctorEstetica = new DoctorEstetica();
+		doctorEstetica.setCPF("asdas");
+		doctorEstetica.setCrm("asda");
+		doctorEstetica.setEspecialidade(new Especialidade());
+		doctorEstetica.setNome("asd");
+		doctorEstetica.setTempoProfissao(10);
+		System.out.println(doctorEstetica.validarEspecialista());
 		GerenciarPacienteController controller = new GerenciarPacienteController();
 		PacienteDao dao = new PacienteDao();
 		// TODO Auto-generated method stub
@@ -37,7 +44,9 @@ public class Main {
 			controller.cadastrarPaciente(p);
 			controller.cadastrarPaciente(pp);
 			System.out.println(controller.verificarExistencia(p));
-			controller.removerPaciene(p);			
+			controller.removerPaciente(p);	
+			p.setId(0);
+			controller.removerPaciente(p);	
 			System.out.println(controller.verificarExistencia(p));
 			System.out.println(controller.buscarPaciente(1));
 			
