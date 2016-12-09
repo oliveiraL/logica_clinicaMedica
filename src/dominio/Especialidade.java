@@ -2,9 +2,8 @@ package dominio;
 
 import validacoes.ValidacaoException;
 
-public class Especialidade {
+public class Especialidade extends Entidade{
 
-    private /*@ spec_public @*/ int id;
 
     private /*@ spec_public nullable @*/ String descricao;
     
@@ -19,37 +18,24 @@ public class Especialidade {
 
     public Especialidade() {
     }
-    
-  /*@ public normal_behavior
-    @ requires getDescricao() != null && getDescricao() != "" && getDesignacao() != null && getDesignacao() != ""; 
-    @ assignable \nothing;
-    @ ensures getDescricao() == \old(getDescricao()) && getDesignacao() == \old(getDesignacao());
-    @ also
-    @ public exceptional_behavior
-    @ requires getDescricao() == null || getDescricao() == "" || getDesignacao() == null || getDesignacao() == "";
-    @ assignable \nothing;
-    @ signals_only ValidacaoException;
-    @*/
-   public void validarEspecialidade() throws ValidacaoException {
 	   
+  /*@ assignable \nothing;
+    @ ensures (getDescricao() != null && getDescricao() != "" && getDesignacao() != null && getDesignacao() != "") ==> (\result == true); 
+    @ ensures getDescricao() == \old(getDescricao()) && getDesignacao() == \old(getDesignacao());
+    @ ensures (getDescricao() == null || getDescricao() == "" || getDesignacao() == null || getDesignacao() == "") ==> (\result == false);
+    */
+   public /*@ pure @*/ boolean validarEspecialidade(){
+
        if(getDescricao() == null || getDescricao().trim().isEmpty()){
-           throw new ValidacaoException("Descricao obrigatoria.");
+           return false;
        }
        
        if(getDesignacao() == null || getDesignacao().trim().isEmpty()){
-           throw new ValidacaoException("Designicao obrigatoria.");
+    	   return false;
        }
+       return true;
           
    }
-
-    public /*@ pure @*/ int getId() {
-        return id;
-    }
-    
-    //@ ensures this.id == id;
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public /*@ pure nullable @*/ String getDescricao() {
         return descricao;

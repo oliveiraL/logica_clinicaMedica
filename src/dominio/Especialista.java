@@ -2,9 +2,7 @@ package dominio;
 
 import validacoes.ValidacaoException;
 
-public abstract class Especialista {
-
-    private /*@ spec_public @*/ int id;
+public abstract class Especialista extends Entidade {
     
 	private /*@ spec_public nullable @*/ Especialidade especialidade;
 
@@ -24,29 +22,25 @@ public abstract class Especialista {
     	// TODO Auto-generated constructor stub
     }
     
-    /*@ public normal_behavior
-    @ requires getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null; 
-    @ assignable \nothing;
-    @ also
-    @ public exceptional_behavior
-    @ requires getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null;
-    @ assignable \nothing;
-    @ signals_only ValidacaoException;
+    /*
+	@ assignable \nothing;
+    @ ensures (getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null) ==> (\result == true) ; 
+    @ ensures (getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null) ==> (\result == false);
     @*/
-   public void validarEspecialista() throws ValidacaoException {
+   public boolean validarEspecialista() {
 	   
        if(getNome() == null || getNome().trim().isEmpty()){
-           throw new ValidacaoException("Nome do especialista obrigatorio.");
+           return false;
        }
        
        if(getCPF() == null || getCPF().trim().isEmpty()){
-           throw new ValidacaoException("CPF do especialista obrigatorio.");
+    	   return false;
        }
-       
        if(getEspecialidade() == null){
-           throw new ValidacaoException("Especialidade do especialista obrigatorio.");
+    	   return false;
        }
-          
+        
+       return true;
    }
 
     public /*@ pure nullable @*/ Especialidade getEspecialidade() {
@@ -58,14 +52,6 @@ public abstract class Especialista {
         this.especialidade = especialidade;
     }
 
-    public /*@ pure @*/ int getId() {
-        return id;
-    }
-    
-    //@ ensures this.id == id;
-    public void setId(int id) {
-        this.id = id;
-    }
     
     public /*@ pure nullable @*/ String getNome() {
         return nome;

@@ -15,6 +15,8 @@ public abstract class GenericDao<T extends Entidade> {
     /*@
       @ 	requires obj != null;
       @ 	assignable this.listagem;
+      @ 	assignable obj;
+	  @ 	ensures obj.getId() == this.listagem.size();
       @ 	ensures 
       @ 	(\forall int i; 0 <= i && i < (this.listagem.size() - 1);
 	  @ 	this.listagem.get(i) == \old(this.listagem).get(i));
@@ -22,6 +24,7 @@ public abstract class GenericDao<T extends Entidade> {
      */
     public void salvar(T obj){
         listagem.add(obj);
+        obj.setId(listagem.size());
         
     }
     

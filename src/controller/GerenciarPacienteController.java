@@ -36,8 +36,20 @@ public class GerenciarPacienteController {
         
     }
 
-    public void removerPaciene(Paciente paciente) throws ValidacaoException {
-        pacienteDao.remover(paciente);
+    /*@ public normal_behavior
+      @ requires paciente != null && this.verificarExistencia(paciente) && paciente.getId() != 0;
+      @ assignable \nothing;
+      @ ensures paciente == \old(paciente);
+      @ also
+      @ public exceptional_behavior
+      @ requires paciente == null || !this.verificarExistencia(paciente) || paciente.getId()== 0;
+      @ assignable \nothing;
+      @ signals_only ValidacaoException;
+      @*/
+    public void removerPaciente(/*@ nullable @*/Paciente paciente) throws ValidacaoException {
+        if(paciente == null)
+        	throw new ValidacaoException("Paciente vazio.");
+    	pacienteDao.remover(paciente);
     }
 
     public Paciente buscarPaciente(int id) throws ValidacaoException {
@@ -102,7 +114,7 @@ public class GerenciarPacienteController {
 //        pacienteDao.atualizar(paciente);
 //    }
 //
-    public boolean verificarExistencia(Paciente paciente) {
+    public /*@ pure @*/ boolean verificarExistencia(Paciente paciente) {
         return pacienteDao.existe(paciente);
     }
 

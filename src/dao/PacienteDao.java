@@ -5,24 +5,7 @@ import validacoes.ValidacaoException;
 
 public class PacienteDao extends GenericDao<Paciente> {
 
-//    public PacienteDao(String pacote) {
-//        super(System.getProperty("user.dir") + "/src/"+pacote+"/paciente.xml");
-//    }
-//
-//    public boolean existe(Paciente paciente) {
-//        return false;
-//    }
-//
-	
-	/*@ also
-	  @ assignable obj;
-	  @ ensures obj.getId() == this.listagem.size();
-	  */
-	@Override
-	public void salvar(Paciente obj) {
-		super.salvar(obj);
-		obj.setId(listagem.size());
-	}
+
 //
 //    public void atualizar(Paciente paciente) {
 //        int i = 0;
