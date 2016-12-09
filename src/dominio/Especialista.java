@@ -27,7 +27,7 @@ public abstract class Especialista extends Entidade {
     @ ensures (getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null) ==> (\result == true) ; 
     @ ensures (getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null) ==> (\result == false);
     @*/
-   public boolean validarEspecialista() {
+   public /*@ pure @*/ boolean validarEspecialista() {
 	   
        if(getNome() == null || getNome().trim().isEmpty()){
            return false;

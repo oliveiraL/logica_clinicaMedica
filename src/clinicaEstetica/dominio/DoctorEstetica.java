@@ -21,8 +21,7 @@ public class DoctorEstetica extends Especialista{
      public DoctorEstetica() {
      }
     
-   /*@ also
-     
+   /*@ also    
      @ assignable \nothing;
      @ ensures (getCrm() != null && !getCrm().equals("") && getTempoProfissao() > 0) || (getNome() != null && !getNome().equals("") && getCPF() != null && !getCPF().equals("") && getEspecialidade() != null) ==> \result == true; 
      @ ensures (getCrm() == null || getCrm().equals("") || getTempoProfissao() <= 0) || (getNome() == null || getNome().equals("") || getCPF() == null || getCPF().equals("") || getEspecialidade() == null) ==> \result == false;

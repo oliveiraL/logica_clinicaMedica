@@ -28,7 +28,7 @@ public class GerenciarEspecialidadeController {
       @ 	requires especialidade != null;
       @		requires especialidade.validarEspecialidade();
       @ 	assignable especialidade;
-      @ 	ensures especialidade.getId() == this.listarPacientes().size();
+      @ 	ensures especialidade.getId() == this.listagem().size();
       @ also
 	  @ public exceptional_behavior
 	  @ 	requires especialidade == null || !especialidade.validarEspecialidade();
@@ -58,7 +58,7 @@ public class GerenciarEspecialidadeController {
     	especialidadeDao.remover(especialidade);
     }
 	    
-    public List<Especialidade> listagem(){
+    public /*@ pure @*/ List<Especialidade> listagem(){
         return especialidadeDao.getListagem();
     }
     
