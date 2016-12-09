@@ -1,61 +1,76 @@
 package controller;
 
 import dominio.Atendimento;
-import dominio.Prontuario;
 import dominio.Paciente;
+import dominio.Prontuario;
+import validacoes.ValidacaoException;
 import java.util.ArrayList;
+
+import dao.ProntuarioDao;
 
 public class GerenciarProntuarioController {
 
-//    private ProntuarioDao prontuarioDao;
-//
-//    public GerenciarProntuarioController(String pacote) {
-//        prontuarioDao = new ProntuarioDao(pacote);
-//    }
-//
-//    /**
-//     *
-//     * @param prontuario
-//     */
-//    public void cadastrarProntuario(Prontuario prontuario) {
-//        prontuarioDao.salvar(prontuario);
-//
-//    }
-//
-//    public void addAtendumento(Prontuario prontuario, Atendimento atendimento) {
-//        prontuario.addAtendimento(atendimento);
-//        atualizarProntuario(prontuario);
-//    }
-//
-//    public void addAtendumento(Atendimento atendimento) {
-//        Prontuario prontuario = buscarProntuario(atendimento.getPaciente());
-//        prontuario.addAtendimento(atendimento);
-//        atualizarProntuario(prontuario);
-//    }
-//
-//    /**
-//     *
-//     * @param prontuario
-//     */
-//    public void atualizarProntuario(Prontuario prontuario) {
-//        prontuarioDao.atualizar(prontuario);
-//    }
-//
-//    public void removerProntuario(Prontuario prontuario) {
-//        prontuarioDao.remover(prontuario);
-//    }
-//
-//    public ArrayList<Prontuario> listarProntuarios() {
-//        return prontuarioDao.listar();
-//    }
-//
-//    public Prontuario buscarProntuario(Paciente paciente) {
-//        return prontuarioDao.buscarProntuario(paciente);
-//    }
-//    
-//    public Prontuario buscarProntuarioID(int ID) {
-//        return prontuarioDao.buscarProntuarioID(ID);
-//    }
-//   
+    private ProntuarioDao prontuarioDao;
+
+    public GerenciarProntuarioController() {
+        prontuarioDao = new ProntuarioDao();
+    }
+    
+    /*@ public normal_behavior 
+    @	requires prontuario != null;
+    @ 	assignable prontuario;
+    @ 	ensures prontuario.getId() == this.listarProntuarios().size();
+    @ also
+	@ public exceptional_behavior
+	@ 	requires prontuario == null;
+	@ 	assignable \nothing;
+	@ 	signals_only ValidacaoException;
+    */
+    public void cadastrarProntuario(Prontuario prontuario) throws ValidacaoException {
+    	if(prontuario == null)
+    		throw new ValidacaoException("Preencha todos os dados do prontuario");
+        prontuarioDao.salvar(prontuario);
+    }
+
+    public void addAtendimento(Prontuario prontuario, Atendimento atendimento) {
+        prontuario.addAtendimento(atendimento);
+    }
+
+    public void addAtendimento(Atendimento atendimento) {
+        Prontuario prontuario = buscarProntuario(atendimento.getPaciente());
+        prontuario.addAtendimento(atendimento);
+    }
+
+    /*@ public normal_behavior
+    @ requires prontuario != null && this.verificarExistencia(prontuario) && prontuario.getId() != 0;
+    @ assignable \nothing;
+    @ ensures prontuario == \old(prontuario);
+    @ also
+    @ public exceptional_behavior
+    @ requires prontuario == null || !this.verificarExistencia(prontuario) || prontuario.getId()== 0;
+    @ assignable \nothing;
+    @ signals_only ValidacaoException;
+    @*/
+    public void removerProntuario(Prontuario prontuario) throws ValidacaoException {
+        if(prontuario == null)
+        	throw new ValidacaoException("Prontuario nulo.");
+    	prontuarioDao.remover(prontuario);
+    }
+
+    public /*@ pure @*/ ArrayList<Prontuario> listarProntuarios() {
+        return prontuarioDao.getListagem();
+    }
+
+    public Prontuario buscarProntuario(Paciente paciente) {
+        return prontuarioDao.buscarProntuario(paciente);
+    }
+    
+    public Prontuario buscarProntuarioID(int ID) throws ValidacaoException {
+        return (Prontuario) prontuarioDao.buscarId(ID);
+    }
+    
+    public /*@ pure @*/ boolean verificarExistencia(Prontuario prontuario) {
+        return prontuarioDao.existe(prontuario);
+    }
 
 }

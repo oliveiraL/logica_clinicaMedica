@@ -1,12 +1,17 @@
 package main;
+import java.util.Date;
+
 import clinicaEstetica.dominio.DoctorEstetica;
 import clinicaEstetica.dominio.PacienteEstetica;
+import clinicaEstetica.dominio.ProntuarioEstetica;
 import dominio.Especialidade;
 import dominio.Especialista;
 import clinicaEstetica.dominio.PacienteEstetica;
 import controller.GerenciarPacienteController;
+import controller.GerenciarProntuarioController;
 import dao.PacienteDao;
 import dominio.Paciente;
+import dominio.Prontuario;
 import validacoes.ValidacaoException;
 
 public class Main {
@@ -21,6 +26,7 @@ public class Main {
 		doctorEstetica.setTempoProfissao(10);
 		System.out.println(doctorEstetica.validarEspecialista());
 		GerenciarPacienteController controller = new GerenciarPacienteController();
+		GerenciarProntuarioController controller2 = new GerenciarProntuarioController();
 		PacienteDao dao = new PacienteDao();
 		// TODO Auto-generated method stub
 		PacienteEstetica p = new PacienteEstetica();
@@ -38,9 +44,11 @@ public class Main {
 		pp.setNome("asd");
 		pp.setResponsavel(null);
 		pp.setTelefone("qwe");
-		
+		ProntuarioEstetica ppp = new ProntuarioEstetica(new Date());
+		ppp.setPaciente(p);
 		
 		try {
+			controller2.cadastrarProntuario(ppp);
 			controller.cadastrarPaciente(p);
 			controller.cadastrarPaciente(pp);
 			System.out.println(controller.verificarExistencia(p));

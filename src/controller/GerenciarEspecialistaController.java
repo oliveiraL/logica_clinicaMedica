@@ -11,6 +11,7 @@ import validacoes.ValidacaoException;
 
 public class GerenciarEspecialistaController {
 
+<<<<<<< HEAD
     private /*@ spec_public non_null @*/ EspecialistaDao especialistaDao;
 //   
 //
@@ -42,6 +43,16 @@ public class GerenciarEspecialistaController {
 	}
 
   /*@ public normal_behavior
+=======
+    private EspecialistaDao especialistaDao;
+   
+
+    public GerenciarEspecialistaController() {
+        especialistaDao = new EspecialistaDao();
+    }
+
+    /*@ public normal_behavior
+>>>>>>> 26dfa0dbe934ba57371814577f1803c639d61ccb
     @ requires especialista != null && this.verificarExistencia(especialista) && especialista.getId() != 0;
     @ assignable \nothing;
     @ ensures especialista == \old(especialista);
@@ -51,6 +62,7 @@ public class GerenciarEspecialistaController {
     @ assignable \nothing;
     @ signals_only ValidacaoException;
     @*/
+<<<<<<< HEAD
     public void removerEspecialista(/*@ nullable @*/Especialista especialista)  throws ValidacaoException {        
         
     	if(especialista == null)
@@ -107,9 +119,45 @@ public class GerenciarEspecialistaController {
 //    public Especialista getEspecialista(String cpf) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
+=======
+    public void cadastrarEspecialista(Especialista especialista) throws ValidacaoException {
+    	if(especialista == null)
+    		throw new ValidacaoException("Preencha os dados da especialidade.");
+    	if(!especialista.validarEspecialista())
+    		throw new ValidacaoException("Preencha os dados do especialidade corretamente.");
+        especialistaDao.salvar(especialista);
+    }
+>>>>>>> 26dfa0dbe934ba57371814577f1803c639d61ccb
     
     public /*@ pure @*/ boolean verificarExistencia(Especialista especialista) {
         return especialistaDao.existe(especialista);
     }
+<<<<<<< HEAD
+=======
+    
+    /*@ public normal_behavior
+    @ requires especialista != null && this.verificarExistencia(especialista) && especialista.getId() != 0;
+    @ assignable \nothing;
+    @ ensures especialista == \old(especialista);
+    @ also
+    @ public exceptional_behavior
+    @ requires especialista == null || !this.verificarExistencia(especialista) || especialista.getId()== 0;
+    @ assignable \nothing;
+    @ signals_only ValidacaoException;
+    @*/
+  public void removerPaciente(/*@ nullable @*/Especialista especialista) throws ValidacaoException {
+      if(especialista == null)
+      	throw new ValidacaoException("Paciente vazio.");
+  	  especialistaDao.remover(especialista);
+  }
+
+  public Especialista buscarPaciente(int id) throws ValidacaoException {
+	    return (Especialista) especialistaDao.buscarId(id);
+  }
+
+  public /*@ pure @*/ ArrayList<Especialista> listagem() {
+      return especialistaDao.getListagem();
+  }
+>>>>>>> 26dfa0dbe934ba57371814577f1803c639d61ccb
 
 }
