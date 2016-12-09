@@ -21,16 +21,12 @@ public class Especialidade {
     }
     
   /*@ public normal_behavior
-<<<<<<< HEAD
-    @ requires getDescricao() != null; 
-=======
     @ requires getDescricao() != null && getDescricao() != "" && getDesignacao() != null && getDesignacao() != ""; 
     @ assignable \nothing;
     @ ensures getDescricao() == \old(getDescricao()) && getDesignacao() == \old(getDesignacao());
     @ also
     @ public exceptional_behavior
     @ requires getDescricao() == null || getDescricao() == "" || getDesignacao() == null || getDesignacao() == "";
->>>>>>> 07cc0e6cb3763bd4816cb87f7918bda6e9d47f5a
     @ assignable \nothing;
     @ signals_only ValidacaoException;
     @*/
